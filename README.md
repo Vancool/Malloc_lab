@@ -24,7 +24,7 @@ My malloc lab based on C
 
 Metadata structure:
 
-![Untitled](img\Untitled.png)
+![Untitled](./img/Untitled.png)
 
 ## **Implement Detail and Optimization:**
 
@@ -143,7 +143,7 @@ void ts_free_lock(void * ptr) {
 
 ****Result****
 
-![Untitled 1](img\Untitled 1.png)
+![Untitled 1](./img/Untitled 1.png)
 
 ****Comparasion:****
 
