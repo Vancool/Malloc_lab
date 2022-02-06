@@ -143,7 +143,7 @@ void ts_free_lock(void * ptr) {
 
 ****Result****
 
-![Untitled 1](./img/Untitled 1.png)
+![Untitled 1](https://github.com/Vancool/Malloc_lab/blob/1e4db7a12a0fa71631d01694e1e92b922f49c8f0/img/Untitled%201.png)
 
 ****Comparasion:****
 
