@@ -52,7 +52,7 @@ One thread version: Maintain an explicit available block linklist
    1. most of operation based on macros, saving time
    2. plug size and allocated status into one word size, saving more space
 
-   backward: 
+   drawback: 
 
    1. Cannot feat in non-lock version for the lab2 homework at Duke, cause all the blocks are coalesce based on physical address. It is hard to maintain threads isolation when no lock outside malloc function. 
    2. Hard to debug (Well...
@@ -62,7 +62,7 @@ One thread version: Maintain an explicit available block linklist
    1. Can adapt to lab2 multiple threads homework at Duke easier
    2. Easy to maintain and revise, therefore I wrote version two at multiple threads malloc lib.
 
-   backward:
+   drawback:
 
    1. unnecessary prev pointer, which waste space: actually I have wrote the Metadata with only one pointer version. But when I test two version in Duke’s test platform, I found binary linklist will get better performance. 
    2. Needed to maintain a actual available first and last block. I think it is better to  use sentinel therefore when update the linklist code will be more elegant.  But the reality is, I need to try my best to save the space in heap, and also when I use sentinel I found the speed of malloc and free drop down sharply. I will continue study on it during my holiday to figure out the reason. 
@@ -112,7 +112,8 @@ One thread version: Maintain an explicit available block linklist
 
 Put mutex outer the malloc and free function:
 
-`void * ts_malloc_lock(size_t size) {
+```C++
+void * ts_malloc_lock(size_t size) {
   pthread_mutex_lock(&lock);
   void * p = bf_malloc(size, No_sbk_lock, &first_free_lock, &last_free_lock);
   pthread_mutex_unlock(&lock);
@@ -122,7 +123,8 @@ void ts_free_lock(void * ptr) {
   pthread_mutex_lock(&lock);
   bf_free(ptr, No_sbk_lock, &first_free_lock, &last_free_lock);
   pthread_mutex_unlock(&lock);
-}`
+}
+```
 
 **Without lock:(Version 2)**
 
@@ -136,7 +138,7 @@ void ts_free_lock(void * ptr) {
 
 - My currency method:
 
-1. Every thread own their linklist with __thread
+1. Every thread own their linklist with `__thread`
 2. Mutex lock when using sbrk
 
 ## Performance Result
